@@ -1,0 +1,25 @@
+{
+  "name": "turing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martynas3336/turing.git"
+  },
+  "author": "dealer.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/martynas3336/turing/issues"
+  },
+  "homepage": "https://github.com/martynas3336/turing#readme",
+  "devDependencies": {},
+  "dependencies": {
+    "blessed": "^0.1.81",
+    "commander": "^3.0.1"
+  }
+}
