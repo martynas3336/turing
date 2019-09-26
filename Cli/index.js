@@ -43,11 +43,12 @@ class Cli
   }
 
   genContent() {
-    this.content = blessed.layout({
-      lauout:'block',
+    this.content = blessed.box({
+      parent:this.screen,
+      tags:true,
       top:'0',
       width:'100%',
-      height:'75%',
+      height:'60%',
 
       padding: {
         top:1,
@@ -72,20 +73,20 @@ class Cli
         fg:'white'
       }
     });
-    this.screen.append(this.content);
   }
 
   genCli() {
     this.cli = blessed.box({
+      parent:this.screen,
       bottom:'0',
       width:'100%',
-      height:'25%',
+      height:'40%',
     });
-    this.screen.append(this.cli);
   }
 
   genOutputCli() {
     this.outputCli = blessed.log({
+      parent:this.cli,
       top:'0',
       width:'100%',
       height:'60%',
@@ -111,11 +112,11 @@ class Cli
       mouse:true,
     });
 
-    this.cli.append(this.outputCli);
   }
 
   genInputCli() {
     this.inputCli = blessed.textarea({
+      parent:this.cli,
       bottom: '0',
       width: '100%',
       height: '40%',
@@ -145,37 +146,24 @@ class Cli
       }
     });
 
-    this.inputCli.key(['C-c'], function(ch, key) {
+    this.inputCli.key(['C-c'], (ch, key) => {
       return process.exit(0);
     });
-
-    this.cli.append(this.inputCli);
-  }
-
-  line() {
-    return blessed.box({
-      tags:true,
-      width:'100%',
-      padding: {
-        bottom:1
-      }
-    })
   }
 
   async output(m) {
     if(isObject(m) && hasOwnProperty(m, 'message'))
     {
       this.outputCli.pushLine(m.message);
-    }
-
-    if(isObject(m) && hasOwnProperty(m, 'errMessage'))
+    } else if(isObject(m) && hasOwnProperty(m, 'errMessage'))
     {
       this.outputCli.pushLine(m.errMessage);
-    }
-
-    if(m instanceof Error)
+    } else if(m instanceof Error)
     {
-      this.outputCli.pushLine(m);
+      this.outputCli.pushLine('SOMETHING WENT WRONG');
+      // this.outputCli.pushLine(m.message);
+    } else {
+      this.outlitCli.pushLine('SOMETHING WENT WRONG');
     }
     this.screen.render();
   }

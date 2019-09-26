@@ -1,21 +1,27 @@
 const commander = require('commander');
 const Cli = require('./Cli');
 const Main = require('./Main');
+const command = new commander.Command();
 
-commander
+command
 .option('-r, --run', 'Run the program')
 .option('-l, --load <file directory>', 'Load selected files')
 .option('-a, --autostart', 'Autostart on load')
-.option('-t, --timeout <delay>', 'Timeout between each step')
+.option('-t, --timeout <timeout>', 'Timeout between each step')
 
-commander.parse(process.argv);
+try {
+  command.parse(process.argv);
+} catch(err) {
+  console.log(err.message);
+  process.exit();
+}
 
-if(commander.run) {
+if(command.run) {
   let cli = new Cli();
   let main = new Main(cli);
-  if(commander.load)
+  if(command.load)
   {
-    main.load({_path:commander.load, loopDirectory:true, autostart:commander.autostart, timeOut:commander.timeout}).catch((err) => {
+    main.load({_path:command.load, loopDirectory:true, autostart:command.autostart, timeout:command.timeout}).catch((err) => {
       cli.output(err);
     });
   }
