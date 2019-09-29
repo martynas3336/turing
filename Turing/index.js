@@ -224,16 +224,16 @@ class Turing {
         }
 
       })
-      if(matched === false)
-      {
-        this.commands.forEach((c) => {
-          if(c[0] === state.toString() && c[1] === '*')
-          {
-            _command = c;
-            matched = true;
-          }
-        })
-      }
+      // if(matched === false)
+      // {
+      //   this.commands.forEach((c) => {
+      //     if(c[0] === state.toString() && c[1] === '*')
+      //     {
+      //       _command = c;
+      //       matched = true;
+      //     }
+      //   })
+      // }
       if(matched === false)
       {
         this.cli.output({errMessage:`MACHINE ${this.id} (${this.name}): NO RULE FOR STATE ${state} AND SYMBOL ${currentSymbol}`})
@@ -480,7 +480,7 @@ class Turing {
             }
           }).catch((err) => {
             cli.output(err);
-          })    
+          })
         })
       })).then(() => {
         return resolve();

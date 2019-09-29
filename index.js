@@ -1,10 +1,10 @@
-const commander = require('commander');
+const commander = require('./commander');
 const Cli = require('./Cli');
 const Main = require('./Main');
 const command = new commander.Command();
 
 command
-.option('-r, --run', 'Run the program')
+// .option('-r, --run', 'Run the program')
 .option('-l, --load <file directory>', 'Load selected files')
 .option('-a, --autostart', 'Autostart on load')
 .option('-t, --timeout <timeout>', 'Timeout between each step')
@@ -16,7 +16,7 @@ try {
   process.exit();
 }
 
-if(command.run) {
+// if(command.run) {
   let cli = new Cli();
   let main = new Main(cli);
   if(command.load)
@@ -26,4 +26,4 @@ if(command.run) {
     });
   }
   main.listen();
-}
+// }

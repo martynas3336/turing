@@ -1,4 +1,4 @@
-const commander = require('commander');
+const commander = require('../commander');
 const fs = require('fs');
 const path = require('path');
 const Turing = require('../Turing');
@@ -28,7 +28,7 @@ class Main {
             return reject({errMessage:'SYSTEM: UNEXPECTED ERROR'})
           }
           Turing.load({instructions:[file], autostart, timeout, cli:this.cli, name:_path}).catch((err) => {
-            console.log(err);
+            // console.log(err);
             this.cli.output(err);
           })
         })
@@ -115,7 +115,7 @@ class Main {
       if(command.resume)
       {
         Turing.resume({id:[machineId], cli:this.cli}).catch((err) => {
-          console.log(err);
+          // console.log(err);
           this.cli.output(err);
         })
       }
@@ -123,7 +123,7 @@ class Main {
       if(command.reset)
       {
         Turing.reset({id:[machineId], cli:this.cli}).catch((err) => {
-          console.log(err);
+          // console.log(err);
           this.cli.output(err);
         })
       }
@@ -131,7 +131,7 @@ class Main {
       if(command.destroy)
       {
         Turing.remove({id:[machineId], cli:this.cli}).catch((err) => {
-          console.log(err);
+          // console.log(err);
           this.cli.output(err);
         })
       }
